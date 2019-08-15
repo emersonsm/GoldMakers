@@ -1,0 +1,22 @@
+## Author: Emerson Santiago
+## Interface: 80200
+## Title: GoldMakers
+## Name: GoldMakers
+## Version: 0.1
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+
+libs\HereBeDragons\HereBeDragons-2.0.lua
+libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
+
+GoldMakers.lua
+GoldMakersFrame.lua
+db\RandomFarmPets.lua
+db\RandomFarmDungeons.lua
+db\RandomFarmMats.lua
+db\RandomFarmOpenWorld.lua
+db\OpenWorldMapId.lua
+db\OpenWorldMarkers.lua
+db\MaterialsMapId.lua
+db\MaterialsMarkers.lua
