@@ -16,6 +16,6 @@ This add-on was made with the purpose of making gold farming more fun, it's more
 <li><strong>/gm mats</strong> - Select a random material to farm.</li>
 <li><strong>/gm world</strong> - Select a random open world to farm transmog.</li>
 </ul>
-All above slash commands will mark in minimap, if avaiable, ideal locations for an 5-man group.
+All above slash commands will mark in minimap, if avaiable, ideal locations for a 5-man group.
 
 We don't have an interface with settings right now, i'm working on new stuff!
