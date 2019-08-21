@@ -2,7 +2,7 @@
 ## Interface: 80200
 ## Title: GoldMakers
 ## Name: GoldMakers
-## Version: 0.1
+## Version: 0.1.1
 
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
