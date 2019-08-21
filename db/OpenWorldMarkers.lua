@@ -1,4 +1,5 @@
-GM.OpenWorldMarkers = {
+local GoldMakers = LibStub("AceAddon-3.0"):GetAddon("GoldMakers")
+GoldMakers.OpenWorldMarkers = {
 	[2] = {
 		[1] = {
 			["x"] = 0.55341219902039,

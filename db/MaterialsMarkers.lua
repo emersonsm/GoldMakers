@@ -1,4 +1,5 @@
-GM.MaterialsMarkers = {
+local GoldMakers = LibStub("AceAddon-3.0"):GetAddon("GoldMakers")
+GoldMakers.MaterialsMarkers = {
 	[1] = {
 		[1] = {
 			["x"] = 0.70598822832108,

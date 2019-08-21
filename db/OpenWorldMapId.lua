@@ -1,4 +1,5 @@
-GM.OpenWorldMapId = {
+local GoldMakers = LibStub("AceAddon-3.0"):GetAddon("GoldMakers")
+GoldMakers.OpenWorldMapId = {
 	[2] = 504,
 	[3] = 78,
 	[7] = 62,

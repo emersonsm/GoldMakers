@@ -1,4 +1,5 @@
-GM.MaterialsMapId = {
+local GoldMakers = LibStub("AceAddon-3.0"):GetAddon("GoldMakers")
+GoldMakers.MaterialsMapId = {
 	[1] = 241,
 	[2] = 241,
 	[4] = 100,
