@@ -71,6 +71,11 @@ function GoldMakers:OnInitialize()
 				minimapPos = 220,
 				radius = 80,
 			},
+			dungeonconfig = {
+				hideBossToastLoot = false,
+				hideBossBanner = false,
+				minimizeObjectives = false,
+			}
 		}
 	}
 	self.db = LibStub("AceDB-3.0"):New("GoldMakersDB", self.defaults, true)
@@ -104,6 +109,22 @@ function GoldMakers:OnInitialize()
 		GoldMakers.icon:Show(addon)
 	else
 		GoldMakers.icon:Hide(addon)
+	end
+
+	if profiledb.dungeonconfig.hideBossToastLoot == true then
+		hooksecurefunc(AlertFrame, "RegisterEvent", function(self, event)
+			AlertFrame:UnregisterEvent(event)
+		end)
+		AlertFrame:UnregisterAllEvents()
+	end
+
+	if profiledb.dungeonconfig.hideBossBanner == true then
+		BossBanner:UnregisterEvent("ENCOUNTER_LOOT_RECEIVED")
+		BossBanner:UnregisterEvent("BOSS_KILL")
+	end
+
+	if profiledb.dungeonconfig.minimizeObjectives == true then
+		ObjectiveTrackerFrame.HeaderMenu.MinimizeButton:Click()
 	end
 end
 

@@ -2,7 +2,7 @@
 ## Interface: 80200
 ## Title: GoldMakers
 ## Notes: A helper addon that will make gold farming more fun.
-## Version: 0.2.2
+## Version: 0.3.2
 ## SavedVariables: GoldMakersDB
 ## X-Embeds: Ace3, HereBeDragons-2.0, LibDataBroker-1.1, LibDBIcon-1.0
 

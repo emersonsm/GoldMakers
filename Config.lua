@@ -65,10 +65,11 @@ optionsTable = {
 			name = "Settings",
 			type = "group",
 			args = {
-				enable = {
+				minimap = {
 					arg = "minimap",
 					name = "Hide icon on minimap",
 					type = "toggle",
+					width = "full",
 					order = 0,
 					set = function(info, val)
 						profiledb[info.arg].hide = val
@@ -79,6 +80,69 @@ optionsTable = {
 						end
 					end,
 					get = function(info) return profiledb[info.arg].hide end
+				},
+				hide_boss_toast_loot = {
+					arg = "hideBossToastLoot",
+					name = "Hide Boss Toast Loot*",
+					type = "toggle",
+					width = "full",
+					order = 1,
+					set = function(info, val)
+						if profiledb.dungeonconfig[info.arg] ~= val then
+							optionsTable.args.settings.args.reload_ui.disabled = false
+						else
+							optionsTable.args.settings.args.reload_ui.disabled = true
+						end
+						profiledb.dungeonconfig[info.arg] = val
+					end,
+					get = function(info) return profiledb.dungeonconfig[info.arg] end
+				},
+				hide_boss_banner = {
+					arg = "hideBossBanner",
+					name = "Hide Boss Banner*",
+					type = "toggle",
+					width = "full",
+					order = 2,
+					set = function(info, val)
+						if profiledb.dungeonconfig[info.arg] ~= val then
+							optionsTable.args.settings.args.reload_ui.disabled = false
+						else
+							optionsTable.args.settings.args.reload_ui.disabled = true
+						end
+						profiledb.dungeonconfig[info.arg] = val
+					end,
+					get = function(info) return profiledb.dungeonconfig[info.arg] end
+				},
+				minimize_objectives = {
+					arg = "minimizeObjectives",
+					name = "Automatic minimize quests and dungeon objectives*",
+					type = "toggle",
+					width = "full",
+					order = 3,
+					set = function(info, val)
+						if profiledb.dungeonconfig[info.arg] ~= val then
+							optionsTable.args.settings.args.reload_ui.disabled = false
+						else
+							optionsTable.args.settings.args.reload_ui.disabled = true
+						end
+						profiledb.dungeonconfig[info.arg] = val
+					end,
+					get = function(info) return profiledb.dungeonconfig[info.arg] end
+				},
+				reload_ui = {
+					order = 4,
+					name = "Reload UI",
+					desc = "Reload UI",
+					descStyle = "inline",
+					disabled = true,
+					type = "execute",
+					func = function() ReloadUI() end,
+				},
+				reload_ui_desc = {
+					order = 5,
+					name = "*Reload your UI to apply these configurations.",
+					descStyle = "inline",
+					type = "description",
 				},
 			},
 		}
