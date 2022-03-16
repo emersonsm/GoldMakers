@@ -41,12 +41,14 @@ function GoldMakers.mainUI()
             label:SetJustifyH("CENTER")
             local dungeon = GoldMakers:GenerateDungeon()
             if dungeon ~= false then
-                label:SetText("You have been chosen to farm |cffff9933" .. dungeon.name .. "|r in |cff33ff99" .. dungeon.location .. "|r")
-                output:SetUserData("container", "You have been chosen to farm |cffff9933" .. dungeon.name .. "|r in |cff33ff99" .. dungeon.location .. "|r")
+                local data = "You have been chosen to farm |cffff9933" .. dungeon.name .. "|r"
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             else
-                label:SetText("You need to select some dungeons on addon configurations.")
-                output:SetUserData("container", "You need to select some dungeons on addon configurations.")
+                local data = "You need to select some dungeons on addon configurations."
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             end
         end
@@ -66,18 +68,20 @@ function GoldMakers.mainUI()
                 output:SetFullWidth(true)
             end
 
-            local label = AceGUI:Create("Label")
+            local label = AceGUI:Create("InteractiveLabel")
             label:SetHeight(50)
             label:SetFullWidth(true)
             label:SetJustifyH("CENTER")
             local world = GoldMakers:GenerateOpenWorld()
             if world ~= false then
-                label:SetText("You have been chosen to farm |cffff9933" .. world.name .. "|r in |cff33ff99" .. world.location .. "|r")
-                output:SetUserData("container", "You have been chosen to farm |cffff9933" .. world.name .. "|r in |cff33ff99" .. world.location .. "|r")
+                local data = "You have been chosen to farm |cffff9933" .. world.name .. "|r"
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             else
-                label:SetText("You need to select some open world farms on addon configurations.")
-                output:SetUserData("container", "You need to select some open world farms on addon configurations.")
+                local data = "You need to select some open world farms on addon configurations."
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             end
         end
@@ -97,18 +101,33 @@ function GoldMakers.mainUI()
                 output:SetFullWidth(true)
             end
 
-            local label = AceGUI:Create("Label")
+            local label = AceGUI:Create("InteractiveLabel")
             label:SetHeight(50)
             label:SetFullWidth(true)
             label:SetJustifyH("CENTER")
             local material = GoldMakers:GenerateMaterial()
             if material ~= false then
-                label:SetText("You have been chosen to farm |cffff9933" .. material.name .. "|r in |cff33ff99" .. material.location .. "|r")
-                output:SetUserData("container", "You have been chosen to farm |cffff9933" .. material.name .. "|r in |cff33ff99" .. material.location .. "|r")
+                local data = "You have been chosen to farm " .. material.name
+                label:SetCallback("OnEnter",
+                    function()
+                        GameTooltip:SetOwner(label.frame, "ANCHOR_CURSOR")
+                        GameTooltip:SetHyperlink(material.code)
+                        GameTooltip:Show()
+                    end
+                
+                )
+                label:SetCallback("OnLeave", 
+                    function()
+                        GameTooltip:Hide()
+                    end
+                )
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             else
-                label:SetText("You need to select some materials on addon configurations.")
-                output:SetUserData("container", "You need to select some materials on addon configurations.")
+                local data = "You need to select some materials on addon configurations."
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             end
         end
@@ -128,18 +147,32 @@ function GoldMakers.mainUI()
                 output:SetFullWidth(true)
             end
 
-            local label = AceGUI:Create("Label")
+            local label = AceGUI:Create("InteractiveLabel")
             label:SetHeight(50)
             label:SetFullWidth(true)
             label:SetJustifyH("CENTER")
             local pet = GoldMakers:GeneratePet()
             if pet ~= false then
-                label:SetText("You have been chosen to farm |cffff9933" .. pet.name .. "|r in |cff33ff99" .. pet.location .. "|r")
-                output:SetUserData("container", "You have been chosen to farm |cffff9933" .. pet.name .. "|r in |cff33ff99" .. pet.location .. "|r")
+                local data = "You have been chosen to farm " .. pet.name
+                label:SetCallback("OnEnter",
+                    function()
+                        GameTooltip:SetOwner(label.frame, "ANCHOR_CURSOR")
+                        local _, speciesID, level, breedQuality = strsplit(":", pet.code)
+                        BattlePetToolTip_Show(tonumber(speciesID), tonumber(level), tonumber(breedQuality))
+                    end
+                )
+                label:SetCallback("OnLeave",
+                    function()
+                        BattlePetTooltip:Hide()
+                    end
+                )
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             else
-                label:SetText("You need to select some pets on addon configurations.")
-                output:SetUserData("container", "You need to select some pets on addon configurations.")
+                local data = "You need to select some pets on addon configurations."
+                label:SetText(data)
+                output:SetUserData("container", data)
                 output:AddChild(label)
             end
         end

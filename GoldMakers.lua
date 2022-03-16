@@ -11,28 +11,28 @@ function GMSlashCmd(input)
 		if cmd == "pets" then
 			local pet = GoldMakers:GeneratePet()
 			if pet ~= false then
-				print("You have been chosen to farm |cffff9933" .. pet.name .. "|r in |cff33ff99" .. pet.location .. "|r")
+				print("You have been chosen to farm " .. pet.name)
 			else
 				GoldMakers:Print("You need to select some pets on addon configurations.")
 			end
 		elseif cmd == "dungeon" then
 			local dungeon = GoldMakers:GenerateDungeon()
 			if dungeon ~= false then
-				print("You have been chosen to farm |cffff9933" .. dungeon.name .. "|r in |cff33ff99" .. dungeon.location .. "|r")
+				print("You have been chosen to farm |cffff9933" .. dungeon.name .. "|r")
 			else
 				GoldMakers:Print("You need to select some dungeons on addon configurations.")
 			end
 		elseif cmd == "material" then
 			local material = GoldMakers:GenerateMaterial()
 			if material ~= false then
-				print("You have been chosen to farm |cffff9933" .. material.name .. "|r in |cff33ff99" .. material.location .. "|r")
+				print("You have been chosen to farm " .. material.name)
 			else
 				GoldMakers:Print("You need to select some materials on addon configurations.")
 			end
 		elseif cmd == "world" then
 			local world = GoldMakers:GenerateOpenWorld()
 			if world ~= false then
-				print("You have been chosen to farm |cffff9933" .. world.name .. "|r in |cff33ff99" .. world.location .. "|r")
+				print("You have been chosen to farm |cffff9933" .. world.name .. "|r")
 			else
 				GoldMakers:Print("You need to select some open world farms on addon configurations.")
 			end
@@ -75,6 +75,9 @@ function GoldMakers:OnInitialize()
 				hideBossToastLoot = false,
 				hideBossBanner = false,
 				minimizeObjectives = false,
+			},
+			tomtomwaypoints = {
+				enabled = true,
 			}
 		}
 	}
@@ -140,14 +143,25 @@ function GoldMakers:GeneratePet()
 		if profiledb.pets[index] ~= false then
 			filterPets[aux] = {
 				["name"] = value.name,
-				["location"] = value.location,
+				["code"] = value.code,
+				["mapId"] = value.mapId,
+				["markersCoord"] = value.markersCoord,
+				["localCoord"] = value.localCoord,
 			}
 			max = max + 1
 			aux = aux + 1
 		end
 	end
 	if max > 0 then
-		return filterPets[fastrandom(1, max)]
+		local randInt = fastrandom(1, max)
+		local pet = filterPets[randInt]
+		if pet.markersCoord ~= nil then
+			GoldMakers.AddPinToMinimap(pet.markersCoord, pet.mapId)
+		end
+		if pet.localCoord ~= nil and profiledb.tomtomwaypoints.enabled == true then
+			GoldMakers.addTomTomWaypoint(pet.name, pet.mapId, pet.localCoord.x / 100, pet.localCoord.y / 100)
+		end
+		return pet
 	else
 		return false
 	end
@@ -161,7 +175,6 @@ function GoldMakers:GenerateDungeon()
 		if profiledb.dungeons[index] ~= false then
 			filterDgs[aux] = {
 				["name"] = value.name,
-				["location"] = value.location,
 			}
 			max = max + 1
 			aux = aux + 1
@@ -181,22 +194,26 @@ function GoldMakers:GenerateMaterial()
 	for index, value in pairs (GoldMakers.Materials) do
 		if profiledb.materials[index] ~= false then
 			filterMaterials[aux] = {
-				["sourceId"] = index,
 				["name"] = value.name,
-				["location"] = value.location,
+				["code"] = value.code,
+				["mapId"] = value.mapId,
+				["markersCoord"] = value.markersCoord,
+				["localCoord"] = value.localCoord,
 			}
 			max = max + 1
 			aux = aux + 1
 		end
 	end
 
-	local randInt = fastrandom(1, max)
-	local material = filterMaterials[randInt]
-	local sourceId = material.sourceId
-	if GoldMakers.MaterialsMarkers[sourceId] ~= nil then
-		GoldMakers.AddPinToMinimap(GoldMakers.MaterialsMarkers[sourceId], GoldMakers.MaterialsMapId[sourceId])
-	end
 	if max > 0 then
+		local randInt = fastrandom(1, max)
+		local material = filterMaterials[randInt]
+		if material.markersCoord ~= nil then
+			GoldMakers.AddPinToMinimap(material.markersCoord, material.mapId)
+		end
+		if material.localCoord ~= nil and profiledb.tomtomwaypoints.enabled == true then
+			GoldMakers.addTomTomWaypoint(material.name, material.mapId, material.localCoord.x / 100, material.localCoord.y / 100)
+		end
 		return material
 	else
 		return false
@@ -210,22 +227,25 @@ function GoldMakers:GenerateOpenWorld()
 	for index, value in pairs (GoldMakers.OpenWorldFarms) do
 		if profiledb.openworld[index] ~= false then
 			filterOpenWorldFarms[aux] = {
-				["sourceId"] = index,
 				["name"] = value.name,
-				["location"] = value.location,
+				["mapId"] = value.mapId,
+				["markersCoord"] = value.markersCoord,
+				["localCoord"] = value.localCoord,
 			}
 			max = max + 1
 			aux = aux + 1
 		end
 	end
 
-	local randInt = fastrandom(1, max)
-	local world = filterOpenWorldFarms[randInt]
-	local sourceId = world.sourceId
-	if GoldMakers.OpenWorldMarkers[sourceId] ~= nil then
-		GoldMakers.AddPinToMinimap(GoldMakers.OpenWorldMarkers[sourceId], GoldMakers.OpenWorldMapId[sourceId])
-	end
 	if max > 0 then
+		local randInt = fastrandom(1, max)
+		local world = filterOpenWorldFarms[randInt]
+		if world.markersCoord ~= nil then
+			GoldMakers.AddPinToMinimap(world.markersCoord, world.mapId)
+		end
+		if world.localCoord ~= nil and profiledb.tomtomwaypoints.enabled == true then
+			GoldMakers.addTomTomWaypoint(world.name, world.mapId, world.localCoord.x / 100, world.localCoord.y / 100)
+		end
 		return world
 	else
 		return false

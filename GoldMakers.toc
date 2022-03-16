@@ -2,9 +2,10 @@
 ## Interface: 80200
 ## Title: GoldMakers
 ## Notes: A helper addon that will make gold farming more fun.
-## Version: 0.3.2
+## Version: 0.4.3
 ## SavedVariables: GoldMakersDB
 ## X-Embeds: Ace3, HereBeDragons-2.0, LibDataBroker-1.1, LibDBIcon-1.0
+## OptionalDeps: TomTom
 
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
@@ -28,8 +29,4 @@ db\Pets.lua
 db\Dungeons.lua
 db\Materials.lua
 db\OpenWorldFarms.lua
-db\OpenWorldMapId.lua
-db\OpenWorldMarkers.lua
-db\MaterialsMapId.lua
-db\MaterialsMarkers.lua
 Config.lua

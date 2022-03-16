@@ -81,12 +81,23 @@ optionsTable = {
 					end,
 					get = function(info) return profiledb[info.arg].hide end
 				},
+				tomtom_waypoints = {
+					arg = "tomtomwaypoints",
+					name = "Enable TomTom waypoints of all drawn farms",
+					type = "toggle",
+					width = "full",
+					order = 1,
+					set = function(info, val)
+						profiledb[info.arg].enabled = val
+					end,
+					get = function(info) return profiledb[info.arg].enabled end
+				},
 				hide_boss_toast_loot = {
 					arg = "hideBossToastLoot",
 					name = "Hide Boss Toast Loot*",
 					type = "toggle",
 					width = "full",
-					order = 1,
+					order = 2,
 					set = function(info, val)
 						if profiledb.dungeonconfig[info.arg] ~= val then
 							optionsTable.args.settings.args.reload_ui.disabled = false
@@ -102,7 +113,7 @@ optionsTable = {
 					name = "Hide Boss Banner*",
 					type = "toggle",
 					width = "full",
-					order = 2,
+					order = 3,
 					set = function(info, val)
 						if profiledb.dungeonconfig[info.arg] ~= val then
 							optionsTable.args.settings.args.reload_ui.disabled = false
@@ -118,7 +129,7 @@ optionsTable = {
 					name = "Automatic minimize quests and dungeon objectives*",
 					type = "toggle",
 					width = "full",
-					order = 3,
+					order = 4,
 					set = function(info, val)
 						if profiledb.dungeonconfig[info.arg] ~= val then
 							optionsTable.args.settings.args.reload_ui.disabled = false
@@ -130,7 +141,7 @@ optionsTable = {
 					get = function(info) return profiledb.dungeonconfig[info.arg] end
 				},
 				reload_ui = {
-					order = 4,
+					order = 5,
 					name = "Reload UI",
 					desc = "Reload UI",
 					descStyle = "inline",
@@ -139,7 +150,7 @@ optionsTable = {
 					func = function() ReloadUI() end,
 				},
 				reload_ui_desc = {
-					order = 5,
+					order = 6,
 					name = "*Reload your UI to apply these configurations.",
 					descStyle = "inline",
 					type = "description",

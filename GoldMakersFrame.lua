@@ -61,7 +61,6 @@ function GoldMakers.NewPin()
 end
 
 function GoldMakers.AddPinToMinimap(coordinates, mapId)
-    -- First clear all pins
     hbdp:RemoveAllMinimapIcons("GoldMakersGoldMakers")
     local max = 0
         for index, value in pairs (coordinates) do
@@ -83,5 +82,17 @@ function GoldMakers.AddPinToMinimap(coordinates, mapId)
         t:SetVertexColor(1, 1, 1, 1)
 
         hbdp:AddMinimapIconMap("GoldMakersGoldMakers", icon, mapId, coordinates[i].x, coordinates[i].y, true)
+    end
+end
+
+
+function GoldMakers.addTomTomWaypoint(title, mapID, x, y)
+    if TomTom then
+        TomTom:AddWaypoint(mapID, x, y, {
+            title = title,
+            persistent = nil,
+            minimap = true,
+            world = true
+        })
     end
 end
